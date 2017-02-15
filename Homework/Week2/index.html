@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+    <img src="images/logo_knmi_venw.png" alt="My test image">
+  </body>
+<p>
+  <textarea id="rawdata">
+	#date,maxtemp
+	20140101,   99  
+	20140102,  103 
+	20140103,  122 
+	20140104,   93  
+	20140105,   84  
+	20140106,  145 
+	</textarea>
+	</p>
+	
+<canvas id="myCanvas" width="300" height="300">
+  An alternative text describing what your canvas displays. 
+</canvas>
+
+<script>
+
+  // Your JavaScript goes here
+	var elem = document.getElementById('rawdata').value;
+	
+	console.log("Hello World");
+	console.log(elem);
+	
+	var tempatureData = elem.split('\n');
+	
+	console.log(tempatureData);
+		
+	var domain = [0, 100];
+	var range = [0,200];
+	
+	var canvas = document.getElementById('myCanvas'); // in your HTML this element appears as <canvas id="mycanvas"></canvas>
+   var ctx = canvas.getContext('2d');
+	
+	ctx.fillStyle = 'rgb(200,0,0)'; // sets the color to fill in the rectangle with
+	ctx.fillRect(10, 0, 300, 300);   // draws the rectangle at position 10, 10 with a width of 55 and a height of 50
+	
+</script>
+</html>
