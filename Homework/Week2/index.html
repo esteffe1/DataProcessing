@@ -2,11 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>My test page</title>
+    <title>>Minor Programmeren - DataProcessing - E.H.Steffens<</title>
   </head>
+   <h2>Minor Programmeren - DataProcessing - E.H.Steffens</h2>
+	<h2>Assignment Week 2 </h2>
   <body>
-    <img src="images/logo_knmi_venw.png" alt="My test image">
+    <img src="images/logo_knmi_venw.png">
+	 
   </body>
+  <p> <a href="http://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi"> Data from KNMI</a>.</p>
 <p>
   <textarea id="rawdata">
   260,20160101,   41
@@ -377,11 +381,12 @@
   260,20161231,   18
 	</textarea>
 	</p>
+	<p> Table 1 KNMI Tempature data for the year 2016 period january - december</p>
 	
 <canvas id="myCanvas" width="500" height="500">
   An alternative text describing what your canvas displays. 
 </canvas>
-
+<p> Figure 1 KNMI Tempature data for the year 2016 period january - december</p>
 <script>
 
   // Retrieve the data from the textarea
@@ -390,6 +395,7 @@
 	console.log("Hello World");
 	console.log(elem);
 	
+		
  // Transform texr data into an array
 	var tempatureData = elem.split('\n');
 	var logLength = tempatureData.length;
@@ -404,6 +410,7 @@
 	var canvas = document.getElementById('myCanvas'); // in your HTML this element appears as <canvas id="mycanvas"></canvas>
    var ctx = canvas.getContext('2d');
 	
+
 	var canvasX = 500;
 	var canvasY = 500;
 	
@@ -433,17 +440,18 @@
 	
 // Plot Y-axis
    ctx.beginPath();
-   ctx.strokeStyle = 'green';
+   ctx.strokeStyle = 'blue';
    ctx.moveTo(20, 20);
    ctx.lineTo(20, 480);
    ctx.stroke();
 
 // Add tick marks to axis
 	var tickmarkLength = 10;
-	
+
+// Y- axis	
 	for (tick = -200; tick <= 400; tick=tick+100){
 		ctx.beginPath();
-		ctx.strokeStyle = 'green';
+		ctx.strokeStyle = 'blue';
 		
 		// Move to tickmark position
 		ctx.moveTo(20 - 5,  yAxis - (tick * yStep));
@@ -454,11 +462,43 @@
 		
 		// Draw text label
 		ctx.font = '12x serif';
+		ctx.textAlign = 'center';
 		ctx.strokeText((tick/10).toString(), 20 - 15,  yAxis - (tick * yStep));
 
 	}
+	
+// X - axix
+	for (tick = 0; tick <= 360; tick=tick+30){
+	ctx.beginPath();
+	ctx.strokeStyle = 'blue';
+	
+	// Move to tick mark position
+	ctx.moveTo(20 + tick * xStep , yAxis - 5);
+	
+	// Draw tick mark
+	ctx.lineTo(20 + tick * xStep,  yAxis + 5 );
+	ctx.stroke();
+	
+	// Draw text label
+	ctx.font = '12x serif';
+	ctx.strokeText(tick.toString(), 20 + tick * xStep,  yAxis +10);
+
+	}
+
 
 // Add labels to axis
+	ctx.font = '20x serif';
+	ctx.strokeStyle = 'red';
+	ctx.textAlign = 'left';
+	ctx.strokeText("Temperature (Celsius)", 20, 10);
+	
+	ctx.font = '20x serif';
+	ctx.strokeStyle = 'blue';
+	ctx.textAlign = 'left';
+
+	ctx.textAlign = 'right';
+	ctx.strokeText("Year 2016 (Days)", 490, 270);
+
 
 // Add title to plot chart
 
@@ -487,6 +527,36 @@
 
 	}
    ctx.stroke();
+	
+//	Eventlistener
+ // function getMousePos(canvas, evt) {
+    // var rect = canvas.getBoundingClientRect();
+    // return {
+      // x: evt.clientX - rect.left,
+      // y: evt.clientY - rect.top
+    // };
+  // }
+  // canvas.addEventListener('mousemove', function(evt) {
+    // var mousePos = getMousePos(canvas, evt);
+    // console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
+	 
+//Plot X-cross-hair
+   // ctx.beginPath();
+   // ctx.strokeStyle = 'grey';
+   // ctx.moveTo(0,  mousePos.y);
+   // ctx.lineTo(500,  mousePos.y);
+   // ctx.stroke();
+	
+//Plot Y-cross-hair
+   // ctx.beginPath();
+   // ctx.strokeStyle = 'grey';
+   // ctx.moveTo( mousePos.x, 0);
+   // ctx.lineTo( mousePos.x, 600);
+   // ctx.stroke();
+	// var mousePos = getMousePos(canvas, evt);
+
+
+  // }, false);
 
 </script>
 </html>
