@@ -1,0 +1,54 @@
+# BRON: KONINKLIJK NEDERLANDS METEOROLOGISCH INSTITUUT (KNMI)
+# Opmerking: door stationsverplaatsingen en veranderingen in waarneemmethodieken zijn deze tijdreeksen van dagwaarden mogelijk inhomogeen! Dat betekent dat deze reeks van gemeten waarden niet geschikt is voor trendanalyse. Voor studies naar klimaatverandering verwijzen we naar de gehomogeniseerde reeks maandtemperaturen van De Bilt <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/gehomogeniseerde-reeks-maandtemperaturen-de-bilt> of de Centraal Nederland Temperatuur <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/centraal-nederland-temperatuur-cnt>.
+# 
+# 
+# STN      LON(east)   LAT(north)     ALT(m)  NAME
+# 240:         4.790       52.318      -3.30  SCHIPHOL
+# 260:         5.180       52.100       1.90  DE BILT
+# 
+# YYYYMMDD = Datum (YYYY=jaar MM=maand DD=dag); 
+# TG       = Etmaalgemiddelde temperatuur (in 0.1 graden Celsius); 
+# VVX      = Maximum opgetreden zicht; 0: <100 m, 1:100-200 m, 2:200-300 m,..., 49:4900-5000 m, 50:5-6 km, 56:6-7 km, 57:7-8 km,..., 79:29-30 km, 80:30-35 km, 81:35-40 km,..., 89: >70 km)
+# 
+# STN,YYYYMMDD,   TG,  VVX
+# 
+  240,20170201,   37,   68
+  240,20170202,   89,   74
+  240,20170203,   84,   75
+  240,20170204,   54,   70
+  240,20170205,   40,   61
+  240,20170206,   44,   62
+  240,20170207,   24,   57
+  240,20170208,   -1,   56
+  240,20170209,  -14,   57
+  240,20170210,  -22,   57
+  240,20170211,   -4,   42
+  240,20170212,    3,   56
+  240,20170213,   16,   60
+  240,20170214,   37,   63
+  240,20170215,   68,   64
+  240,20170216,   62,   70
+  240,20170217,   69,   70
+  240,20170218,   43,   60
+  240,20170219,   64,   65
+  240,20170220,   91,   80
+  260,20170201,   34,   73
+  260,20170202,   86,   75
+  260,20170203,   86,   75
+  260,20170204,   57,   75
+  260,20170205,   44,   63
+  260,20170206,   43,   62
+  260,20170207,   24,   57
+  260,20170208,    0,   56
+  260,20170209,  -16,   56
+  260,20170210,  -23,   56
+  260,20170211,   -4,   40
+  260,20170212,    7,   56
+  260,20170213,   22,   62
+  260,20170214,   38,   64
+  260,20170215,   74,   70
+  260,20170216,   68,   70
+  260,20170217,   70,   65
+  260,20170218,   56,   65
+  260,20170219,   62,   64
+  260,20170220,   91,   81
