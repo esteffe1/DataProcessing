@@ -1,0 +1,13 @@
+.bar {
+  fill: steelblue;
+  fill-opacity: .1;
+}
+
+.bar:hover {
+  fill: pink;
+}
+
+.axis--x path {
+  display: none;
+}
+
