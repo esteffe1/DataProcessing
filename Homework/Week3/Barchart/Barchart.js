@@ -51,6 +51,8 @@ d3.json("KNMI_20170220.json", function(error, data) {
       .attr("y", function(d) { return  y(d.vis) })
       .attr("width", x.bandwidth())
       .attr("height", function(d) { return height - y(d.vis); });
+
+  
 	
 });
 
