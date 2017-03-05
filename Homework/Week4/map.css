@@ -1,0 +1,26 @@
+.bar {
+  fill: steelblue;
+  fill-opacity: .5;
+}
+
+.bar:hover {
+  fill: pink;
+}
+
+.axis--x path {
+  display: none;
+}
+
+text {
+	  font: 12px sans-serif;
+	  color: black;
+}
+text.value {
+	  font-size: 120%;
+	  fill: black;
+}
+
+vis {
+	  font: 12px sans-serif;
+	  color: black;
+}
