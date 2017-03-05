@@ -1,6 +1,6 @@
 .bar {
   fill: steelblue;
-  fill-opacity: .1;
+  fill-opacity: .5;
 }
 
 .bar:hover {
@@ -11,3 +11,16 @@
   display: none;
 }
 
+text {
+	  font: 12px sans-serif;
+	  color: black;
+}
+text.value {
+	  font-size: 120%;
+	  fill: black;
+}
+
+vis {
+	  font: 12px sans-serif;
+	  color: black;
+}
