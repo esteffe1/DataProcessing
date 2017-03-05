@@ -1,4 +1,4 @@
-// Barchart.js
+// BArchart.js
 
 
 // Canvas - Drawing area 
