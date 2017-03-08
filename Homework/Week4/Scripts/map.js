@@ -40,7 +40,7 @@ var map = new Datamap({
 	geographyConfig: {
 		popupTemplate: function(geo, data) {
 			
-			if (data.name){
+			if (data){
 				console.log( geo.properties.name + data.popn)
 				return ["<div class='hoverinfo'>Population in " + data.name + " \n" + data.popn + "</div>"].join('');
 			}else{
