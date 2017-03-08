@@ -2,10 +2,8 @@
 
 function ShowMap()
 {
-// 
-console.log("Hello map");
 
-//basic map config with custom fills, mercator projection
+//basic map configuration with custom fills, Mercator projection
 var map = new Datamap({
   scope: 'world',
   element: document.getElementById('container1'),
@@ -42,10 +40,10 @@ var map = new Datamap({
 			
 			if (data){
 				console.log( geo.properties.name + data.popn)
-				return ["<div class='hoverinfo'>Population in " + data.name + " \n" + data.popn + "</div>"].join('');
+				return ["<div class='hoverinfo'>Population in " + data.name + "</br>" + data.popn + " Humans" + "</div>"].join('');
 			}else{
 				console.log( geo.properties.name)
-				return ["<div class='hoverinfo'>Population in " + geo.properties.name + "</div>"].join(' ');
+				return ["<div class='hoverinfo'>" + geo.properties.name + "</div>"].join('');
 			}
       }
 	}

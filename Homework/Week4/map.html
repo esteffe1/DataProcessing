@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title> Minor Programmeren - DataProcessing - E.H.Steffens </title>
+	<head>
+		<meta charset="utf-8">
+		<title> Minor Programmeren - DataProcessing - E.H.Steffens </title>
 	</head>
 	
-  <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script src="https://d3js.org/topojson.v1.min.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="https://d3js.org/topojson.v1.min.js"></script>
   
-  <!-- I recommend you host this file on your own, since this will change without warning -->
-  <script src="https://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+ <!-- I recommend you host this file on your own, since this will change without warning -->
+	<script src="https://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
   
-  <h2>Datamaps Playground</h2>
-  <p><a href="https://datamaps.github.io/">DataMaps Project Homepage</a></p>
+	<h2>Datamaps Playground</h2>
+	<p><a href="https://datamaps.github.io/">DataMaps Project Homepage</a></p>
   
-  <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
+	<div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
   
-  <script src="Scripts/map.js" charset="utf-8"></script> 
+	<script src="Scripts/map.js" charset="utf-8"></script> 
   
-  <script >
-  ShowMap();
-     
-</script> 
+	<script > ShowMap(); </script> 
 
-	<h5> Interaction  </h5> 
 	
-	<p> The map shows the population of several African countries which are coloured red.  Data shown is the total amount of people living in 1970. </p> 
-	<p> The tooltip behaviour is weird, but I didn't manage to solve it.  Al tough every example I checked was using this code. </p>
+	<h3> Interaction  </h3> 
+	
+	<p> The map shows the population of several African countries (coloured red). 
+	
+	</br> Data shown represents the number of people living in that country in 1970. </p> 
+	
+	<p> Visualisation shows data available for countries in red, and is shown when mouse is over a country. </p>
+	
+	<p> Datasource <a href "http://microdata.worldbank.org+"> Worldbank.org</a></p> 
 	
 </html>
