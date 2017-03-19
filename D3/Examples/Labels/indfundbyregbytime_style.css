@@ -1,0 +1,36 @@
+body   { font-family : Arial;
+                  padding : 5px 10px 10px 10px;}
+
+         pblurb { color : Navy;
+                  font-weight : bold;}
+
+         .axis path,
+         .axis line { fill: none;
+                      stroke: #000;
+                      stroke-width : 1;
+                      fill : none;
+                      shape-rendering: crispEdges;}
+
+         .line { fill : none;
+                stroke: black;
+                shape-rendering: crispEdges;}
+
+         table { font-family: Arial;
+                 cell-spacing: 0;
+                 font-style: normal;
+                 font-size: 16px;
+                 border-collapse: collapse;
+                 border: 1px solid black;
+                 empty-cells:show;}
+
+         th { text-align: center;
+              width: 212px;
+              border:1px solid Navy;
+              background-color: Silver}
+
+         td { text-align: center;
+              width: 212px;
+              height: 50px;
+              color : red;
+              border:1px solid Navy;
+              empty-cells:show;}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Colours Page</title>
+
+    <style>
+        .bs-sidebar .nav > .active > ul {
+            display: block;
+            margin-bottom: 8px;
+        }
+        text.shadow {
+            stroke: white;
+            stroke-width: 2.3px;
+            opacity: 0.5;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- load the d3.js library -->    
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+ 
+var width = 174;
+var height = 32;
+var border = 10;
+
+var container = d3.select("body"); 
+
+d3.csv("colours2.csv", function(error, data) {
+
+    // ****************  Individual colours  *********************
+    data.forEach(function(d) { 
+        
+        // create the SVG area for the rectangle
+        svgArea = container.append("svg")
+            .attr("width", width + (2*border))    
+            .attr("height", height + (2*border));
+            
+        // Add in the rectangle
+        svgArea.append("rect")
+            .attr("transform", "translate("+border+","+border+")")
+            .attr("height", height)
+            .attr("width", width)
+            .style("fill", d.colour)
+            .attr("rx", 5)
+            .attr("ry", 5); 
+
+        // Add in the white background for the label
+        svgArea.append("text")
+            .attr("transform", 
+                  "translate("+(border+(width/2))+","+(border+10)+")")
+            .attr("dy", ".71em")
+            .attr("text-anchor", "middle")
+            .style("fill", "black")
+            .style("font-weight", "bold")
+            .attr("class", "shadow")
+            .text(d.colour); 
+
+        // Add in the label
+        svgArea.append("text")
+            .attr("transform", 
+                  "translate("+(border+(width/2))+","+(border+10)+")")
+            .attr("dy", ".71em")
+            .attr("text-anchor", "middle")
+            .style("fill", "black")
+            .style("font-weight", "bold")
+            .text(d.colour); 
+    });
+});
+
+</script>
+
+</body>
+</html>

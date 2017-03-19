@@ -3,18 +3,35 @@
 	<head>
 		<meta charset="utf-8">
 		<title> Minor Programmeren - DataProcessing - E.H.Steffens </title>
+	
+		<link rel="stylesheet" type="text/css" href="Styles/line.css">
 	</head>
 	
-<svg width="960" height="600"></svg>
-
-<script src="https://d3js.org/d3.v4.min.js"></script>
-
-<script src="Scripts/line.js" charset="utf-8"></script> 
+	<body>	
+	
+	<div class="dropdown">
+	  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+	  <div id="myDropdown" class="dropdown-content">
+		  <li> <a class="m" value = "Average day temperature" <a href="#"> Average day temperature </a></li>
+		  <li> <a class="m" value = "Minimum temperature"      <a href="#"> Minimum temperature </a></li>
+		  <li> <a class="m" value = "Maxium temperature"       <a href="#"> Maxium temperature  </a></li>
+	  </div>
+	</div>
+	
+	<svg width="1100" height="600"  x="100" y="50" >
+	 <rect height="600" width="1100" x="0" y="0" 
+     style="fill: whitesmoke; stroke: aliceblue; stroke-width: 3"/>
+	</svg>
+	
+<!-- <script src="https://d3js.org/d3.v3.js" charset="utf-8"></script>  -->
+	<script src="d3v4/d3.js" charset="utf-8"></script> 
+	<script src="Scripts/line.js" charset="utf-8"></script> 
   
-
-<script>
-
-	lineGraph();
-
-</script>
+	<script> lineGraph(); </script>
+	
+	<h1> Multi line graphs  </h1> 
+	
+	<p> Datasource <a href "hhttp://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi+>knmi.nl</a></p> 
+	
+	</body>	
 </html>
