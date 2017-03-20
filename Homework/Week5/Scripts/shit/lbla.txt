@@ -18,14 +18,8 @@ var x = d3.scaleTime().rangeRound([0, width]);
 var y = d3.scaleLinear().rangeRound([height, 0]);
 
 var graphName = ["tg", "tn", "tx"]; 
-var graphSelect ="Average day temperature"; // Default graph
-var graphSelectDefault ="Average day temperature"; // Default graph
-var graphOpacity = [1, 0, 0];
+var graphSelect ="tg"; // Default graph
 
-
-var tgOpacity = 1;
-var tnOpacity = 0;
-var txOpacity = 0;
 
 var lineTG = d3.line()
     .x(function(d) { return x(d.date); })
@@ -58,8 +52,8 @@ var horizontalLine = svg.append("line")
 		.attr("stroke", "grey")
 		.attr("stroke-width", 1)
 		.attr("pointer-events", "none");
+		
 
- 
 // -- Visualize the data --
 	 	
 // Load data from a json format file
@@ -99,11 +93,10 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 			.attr("stroke-linecap", "round")
 			.attr("stroke-width", 1.5)
 			.attr("class", "line")   
-			.style("stroke", function() { return d.color = color(d.key); }) 
-			.style("opacity", tgOpacity)			
+			.style("stroke", function() { return d.color = color(d.key); })       
 			.attr("id", 'tag_'+ graphSelect + d.key.replace(/\s+/g, '')) // assign ID			
 			.attr("d", lineTG(d.values));
-				
+							 		
 		graphSelect = "tn";
 										
       g.append("path")			
@@ -112,8 +105,7 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 			.attr("stroke-linecap", "round")
 			.attr("stroke-width", 1.5)
 			.attr("class", "line")   
-			.style("stroke", function() { return d.color = color(d.key); }) 
-			.style("opacity", tnOpacity)		
+			.style("stroke", function() { return d.color = color(d.key); })       
 			.attr("id", 'tag_'+ graphSelect + d.key.replace(/\s+/g, '')) // assign ID			
 			.attr("d", lineTN(d.values));
 			
@@ -126,13 +118,12 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 			.attr("stroke-width", 1.5)
 			.attr("class", "line")   
 			.style("stroke", function() { return d.color = color(d.key); })       
-			.style("opacity", txOpacity)
 			.attr("id", 'tag_'+ graphSelect + d.key.replace(/\s+/g, '')) // assign ID			
 			.attr("d", lineTX(d.values));
 							 					 	
 		graphSelect = "tg";	
 
-	// Add the Legend at the right side of graph
+		// Add the Legend
 		g.append("text")
          .attr("class", "legend")    				// style the legend       
          .attr("x", width + (margin.right/2) )  // space legend
@@ -176,14 +167,6 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 	
 // -- Data dependend objects and functions here --
 
-	g.append("text")
-		.attr("class", "title")    	// style the title    
-		.attr("id","title")
-		.attr("x", width/2 )  			// space legend
-		.attr("y", 15)
-		.style("fill", "orange")
-		.text(graphSelectDefault)
-
 // X axis
 	g.append("g")
 		.attr("transform", "translate(0," + height + ")")
@@ -225,54 +208,7 @@ var focus = svg.append("g")
       .on("mouseover", function() { focus.style("display", null); })
       .on("mouseout", function() { focus.style("display", "none"); })
       .on("mousemove", mousemove);
-		
-// -- Drop down menu --
-	d3.selectAll(".m")
-		.on("click", function() {
-			graphSelect = this.getAttribute("value");
 
-			d3.select("#title").text(graphSelect).transition().duration(1000) ;
-			
-			if(graphSelect == "Average day temperature"){				
-				var tgOpacity = 1;
-				var tnOpacity = 0;
-				var txOpacity = 0;
-			} 
-			else if(graphSelect == "Minimum temperature" ){
-				var tgOpacity = 0;
-				var tnOpacity = 1;
-				var txOpacity = 0;
-			} 
-			else if(graphSelect == "Maxium temperature" ){
-				var tgOpacity = 0;
-				var tnOpacity = 0;
-				var txOpacity = 1;
-			}
-			
-			d3.select("path#tag_txSchiphol")
-						.style("opacity", txOpacity); 
-			d3.select("path#tag_txEelde")
-						.style("opacity", txOpacity); 
-			d3.select("path#tag_txRotterdam")
-						.style("opacity", txOpacity); 			
-		
-			d3.select("path#tag_tgSchiphol")
-						.style("opacity", tgOpacity); 
-			d3.select("path#tag_tgEelde")
-						.style("opacity", tgOpacity); 
-			d3.select("path#tag_tgRotterdam")
-						.style("opacity", tgOpacity); 
-		
-			d3.select("path#tag_tnSchiphol")
-						.style("opacity", tnOpacity); 
-			d3.select("path#tag_tnEelde")
-						.style("opacity", tnOpacity); 
-			d3.select("path#tag_tnRotterdam")
-						.style("opacity", tnOpacity); 						
-			
-		});
-		
-		
 function mousemove() {
 		
 		mouse = d3.mouse(this);
@@ -284,29 +220,20 @@ function mousemove() {
 			
 			var date = d.values[index].date;
 			
-			if(graphSelect == "Average day temperature"){
-				var temperature =  d.values[index].tg;	
-				var ynew = y(d.values[index].tg) + margin.top;
-			} 
-			else if(graphSelect == "Minimum temperature" ){
-				var temperature =  d.values[index].tn;
-				var ynew = y(d.values[index].tn) + margin.top;
-			} 
-			else if(graphSelect == "Maxium temperature" ){
-				var temperature =  d.values[index].tx;
-				var ynew = y(d.values[index].tx) + margin.top;
-			}
-								
+			var temperature =  d.values[index].tg;
+			
 			var xnew = x(d.values[index].date) + margin.left;
-					
+			var ynew = y(d.values[index].tg) + margin.top;
+			
+			//console.log( "Index = " + index );
+			
 		// Show date and temparatures below station names
 			d3.select("#tagt" + d.key.replace(/\s+/g), '').text("TG: " +  temperature);
 			d3.select("#tagd" + d.key.replace(/\s+/g), '').text("DATE: " +  formatDate(date));
 		
-
 		// Focus on graph
 			focus.attr("transform", "translate(" + xnew + "," + ynew + ")");
-			focus.select("text").html("Temperature:" + temperature + " " + "Date:" + formatDate(date) );
+			focus.select("text").text("Temperature:" + temperature + "<br>" + "Date:" + formatDate(date) );
 			
 		// Show crosshair
 			if(mousex > margin.left && mousex < margin.left + width){
@@ -328,27 +255,63 @@ function mousemove() {
 		// Select text by id and then remove
       // d3.select("#t" + mousex + "-" + mousey + "-").remove(); 
 	});
-	
-});
+			
+// -- Drop down menu --
+	d3.selectAll(".m")
+		.on("click", function() {
+			graphSelect = this.getAttribute("value");
+			
+			for(var i = 0; i < graphName.length; i++){
+				 
+				dataNest.forEach(function(d,i) { 
+					
+				console.log(d.key)
+			`}	
+			
+			}
+		
+			
+			if(graphSelect == "Average day temperature"){
+				graphSelect = "tg";
+				d3.select("#tag_"+ graphSelect + d.key.replace(/\s+/g, ''))
+                    .transition().duration(100) 
+                    .style("opacity", newOpacity); 
+				console.log("Value: " + graphSelect);
+				=[
+			}else if(graphSelect == "minimum temperature"){
+				graphSelect = "tn";
+				console.log("Value: " + graphSelect);
+			}else if(graphSelect == "maxium temperature"){
+				graphSelect = "tx";
+				console.log("Value: " + graphSelect);			
+			}else{
+				graphSelect = "none";
+			}
+		}	
+		)
+
+
+			
+	};
+
 }
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+ /* When the user clicks on the button,
+	toggle between hiding and showing the dropdown content */
+	function myFunction() {
+		 document.getElementById("myDropdown").classList.toggle("show");
+	}
+	// Close the dropdown menu if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn')) {
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
+		 var dropdowns = document.getElementsByClassName("dropdown-content");
+		 var i;
+		 for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+			  openDropdown.classList.remove('show');
+			}
+		 }
+	  }
+}	 
