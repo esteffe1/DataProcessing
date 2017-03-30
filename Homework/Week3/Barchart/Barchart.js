@@ -34,7 +34,7 @@ d3.json("KNMI_20170220.json", function(error, data) {
   g.append("g")
       .attr("class", "axis axis--y")
       .call(d3.axisLeft(y).ticks(10, "c"))
-    .append("text")
+		.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 10)
       .attr("dy", "0.71em")

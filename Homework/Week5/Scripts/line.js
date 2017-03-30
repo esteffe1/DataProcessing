@@ -1,27 +1,31 @@
-// lineGraph.js
+/*
+ lineGraph.js
+*/
 
 function lineGraph()
 {
+// -- Global variables and settings --
 
+// SVG element 
 var svg = d3.select("svg"),
-    margin = {top: 20, right: 100, bottom: 30, left: 50},
+    margin = {top: 20, right: 200, bottom: 30, left: 50},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// Convert dates to and from javascript format
 var parseTime = d3.timeParse("%Y%m%d");
-
 var formatDate = d3.timeFormat("%d-%m-%Y");
 
+// X and Y axis scales
 var x = d3.scaleTime().rangeRound([0, width]);
-
 var y = d3.scaleLinear().rangeRound([height, 0]);
 
+// Graph 
 var graphName = ["tg", "tn", "tx"]; 
 var graphSelect ="Average day temperature"; // Default graph
 var graphSelectDefault ="Average day temperature"; // Default graph
-var graphOpacity = [1, 0, 0];
-
+var graphSelected = "tg";
 
 var tgOpacity = 1;
 var tnOpacity = 0;
@@ -59,7 +63,6 @@ var horizontalLine = svg.append("line")
 		.attr("stroke-width", 1)
 		.attr("pointer-events", "none");
 
- 
 // -- Visualize the data --
 	 	
 // Load data from a json format file
@@ -93,6 +96,8 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 	
 	// Draw the TG-graph for each station
 	
+		 graphSelected = "tg";
+	
       g.append("path")			
 			.attr("fill", "none")
 			.attr("stroke-linejoin", "round")
@@ -101,10 +106,10 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 			.attr("class", "line")   
 			.style("stroke", function() { return d.color = color(d.key); }) 
 			.style("opacity", tgOpacity)			
-			.attr("id", 'tag_'+ graphSelect + d.key.replace(/\s+/g, '')) // assign ID			
+			.attr("id", 'tag_'+ graphSelected + d.key.replace(/\s+/g, '')) // assign ID			
 			.attr("d", lineTG(d.values));
 				
-		graphSelect = "tn";
+		graphSelected = "tn";
 										
       g.append("path")			
 			.attr("fill", "none")
@@ -114,10 +119,10 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 			.attr("class", "line")   
 			.style("stroke", function() { return d.color = color(d.key); }) 
 			.style("opacity", tnOpacity)		
-			.attr("id", 'tag_'+ graphSelect + d.key.replace(/\s+/g, '')) // assign ID			
+			.attr("id", 'tag_'+ graphSelected + d.key.replace(/\s+/g, '')) // assign ID			
 			.attr("d", lineTN(d.values));
 			
-		graphSelect = "tx";					 
+		graphSelected = "tx";					 
 		
       g.append("path")			
 			.attr("fill", "none")
@@ -127,10 +132,8 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 			.attr("class", "line")   
 			.style("stroke", function() { return d.color = color(d.key); })       
 			.style("opacity", txOpacity)
-			.attr("id", 'tag_'+ graphSelect + d.key.replace(/\s+/g, '')) // assign ID			
+			.attr("id", 'tag_'+ graphSelected + d.key.replace(/\s+/g, '')) // assign ID			
 			.attr("d", lineTX(d.values));
-							 					 	
-		graphSelect = "tg";	
 
 	// Add the Legend at the right side of graph
 		g.append("text")
@@ -143,10 +146,11 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 			.on("click", function(){
 				
             // Determine if current line is visible 
+				console.log(d.active);
                 var active   = d.active ? false : true,				
                 newOpacity = active ? 0 : 1; 				            
-			// Hide or show the elements based on the ID
-                d3.select("#tag_"+ graphSelect + d.key.replace(/\s+/g, ''))
+				// Hide or show the elements based on the ID
+                d3.select("#tag_"+ graphSelected + d.key.replace(/\s+/g, ''))
                     .transition().duration(100) 
                     .style("opacity", newOpacity); 
             // Update whether or not the elements are active
@@ -176,6 +180,7 @@ d3.json("Data/KNMI_20170311.json", function(error, data) {
 	
 // -- Data dependend objects and functions here --
 
+// Graph title text
 	g.append("text")
 		.attr("class", "title")    	// style the title    
 		.attr("id","title")
@@ -237,17 +242,22 @@ var focus = svg.append("g")
 				var tgOpacity = 1;
 				var tnOpacity = 0;
 				var txOpacity = 0;
+				graphSelected = "tg";
 			} 
 			else if(graphSelect == "Minimum temperature" ){
 				var tgOpacity = 0;
 				var tnOpacity = 1;
 				var txOpacity = 0;
+				graphSelected = "tn";
 			} 
-			else if(graphSelect == "Maxium temperature" ){
+			else if(graphSelect == "Maximum temperature" ){
 				var tgOpacity = 0;
 				var tnOpacity = 0;
 				var txOpacity = 1;
+				graphSelected = "tx";
 			}
+			
+			//d3.selectAll(".tagGem").style("opacity", txOpacity);
 			
 			d3.select("path#tag_txSchiphol")
 						.style("opacity", txOpacity); 
@@ -292,7 +302,7 @@ function mousemove() {
 				var temperature =  d.values[index].tn;
 				var ynew = y(d.values[index].tn) + margin.top;
 			} 
-			else if(graphSelect == "Maxium temperature" ){
+			else if(graphSelect == "Maximum temperature" ){
 				var temperature =  d.values[index].tx;
 				var ynew = y(d.values[index].tx) + margin.top;
 			}
@@ -300,10 +310,9 @@ function mousemove() {
 			var xnew = x(d.values[index].date) + margin.left;
 					
 		// Show date and temparatures below station names
-			d3.select("#tagt" + d.key.replace(/\s+/g), '').text("TG: " +  temperature);
+			d3.select("#tagt" + d.key.replace(/\s+/g), '').text(graphSelect +  temperature);
 			d3.select("#tagd" + d.key.replace(/\s+/g), '').text("DATE: " +  formatDate(date));
 		
-
 		// Focus on graph
 			focus.attr("transform", "translate(" + xnew + "," + ynew + ")");
 			focus.select("text").html("Temperature:" + temperature + " " + "Date:" + formatDate(date) );
@@ -325,8 +334,6 @@ function mousemove() {
 			verticalLine.attr("opacity", 0);
 			horizontalLine.attr("opacity", 0);
 			
-		// Select text by id and then remove
-      // d3.select("#t" + mousex + "-" + mousey + "-").remove(); 
 	});
 	
 });

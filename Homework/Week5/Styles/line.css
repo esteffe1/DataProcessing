@@ -38,11 +38,12 @@ body {
 .title {
     font-size: 20px;
     font-weight: bold;
-    text-anchor: middle;
+     text-anchor: middle;
 }
 
 .temperature {
     font-size: 12px;
+	 color: green;
     text-anchor: middle;
 }
 
